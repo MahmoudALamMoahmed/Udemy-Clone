@@ -1,0 +1,195 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "MahmoudALam@Admin.com",
+      "password": "Mahmoud123"
+    }
+  ],
+  "products": [
+    {
+      "title": "Html",
+      "category": "FrontEnd",
+      "price": 50,
+      "createdAt": "2025-04-22T22:36:12.888Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745365263/courses/1745365263935_1.jpg",
+      "id": 1
+    },
+    {
+      "title": "Css",
+      "category": "FrontEnd",
+      "price": 70,
+      "createdAt": "2025-04-22T23:41:28.067Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745365285/courses/1745365286432_3.jpg",
+      "id": 2
+    },
+    {
+      "title": "Java Script",
+      "category": "FrontEnd",
+      "price": 150,
+      "createdAt": "2025-04-22T23:41:49.445Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745365307/courses/1745365308114_5.jpg",
+      "id": 3
+    },
+    {
+      "title": "React Js",
+      "category": "FrontEnd",
+      "price": 150,
+      "createdAt": "2025-04-23T00:13:18.264Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745367195/courses/1745367194147_4.png",
+      "id": 4
+    },
+    {
+      "title": "Node.Js",
+      "category": "BackEnd",
+      "price": 100,
+      "createdAt": "2025-04-23T00:24:35.402Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745367872/courses/1745367865167_1.png",
+      "id": 5
+    },
+    {
+      "title": "Angular",
+      "category": "FrontEnd",
+      "price": 300,
+      "createdAt": "2025-04-23T00:30:17.994Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745368215/courses/1745368215528_6.png",
+      "id": 6
+    },
+    {
+      "title": "Vue.js",
+      "category": "FrontEnd",
+      "price": 200,
+      "createdAt": "2025-04-23T00:30:42.802Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745368240/courses/1745368241582_7.png",
+      "id": 7
+    },
+    {
+      "title": "Tailwind Css",
+      "category": "FrontEnd",
+      "price": 40,
+      "createdAt": "2025-04-23T00:31:03.591Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745368261/courses/1745368261743_8.jpg",
+      "id": 8
+    },
+    {
+      "title": "BootStrap",
+      "category": "Other",
+      "price": 20,
+      "createdAt": "2025-04-23T00:31:40.938Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745368298/courses/1745368299373_9.jpg",
+      "id": 9
+    },
+    {
+      "title": "Sass Css",
+      "category": "FrontEnd",
+      "price": 10,
+      "createdAt": "2025-04-23T00:32:20.039Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745368337/courses/1745368338068_10.png",
+      "id": 10
+    },
+    {
+      "title": "Express Js",
+      "category": "BackEnd",
+      "price": 80,
+      "createdAt": "2025-04-23T00:53:37.826Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745369615/courses/1745369616147_11.png",
+      "id": 11
+    },
+    {
+      "title": "Nest Js",
+      "category": "BackEnd",
+      "price": 140,
+      "createdAt": "2025-04-23T00:53:56.251Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745369633/courses/1745369634571_12.jpg",
+      "id": 12
+    },
+    {
+      "title": "FrontEnd Development",
+      "category": "FrontEnd",
+      "price": 400,
+      "createdAt": "2025-04-23T00:56:20.698Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745369778/courses/1745369778460_13.jpg",
+      "id": 13
+    },
+    {
+      "title": "BackEnd Development",
+      "category": "BackEnd",
+      "price": 500,
+      "createdAt": "2025-04-23T00:56:47.430Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745369804/courses/1745369804820_14.jpg",
+      "id": 14
+    },
+    {
+      "title": "FullStack Web Developer",
+      "category": "FullStack",
+      "price": 800,
+      "createdAt": "2025-04-23T00:59:06.045Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745369943/courses/1745369943548_15.jpg",
+      "id": 15
+    },
+    {
+      "title": "Python",
+      "category": "Programming language",
+      "price": 120,
+      "createdAt": "2025-04-23T01:07:56.715Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745370474/courses/1745370464859_16.jpg",
+      "id": 16
+    },
+    {
+      "title": "Java",
+      "category": "Programming language",
+      "price": 150,
+      "createdAt": "2025-04-23T01:08:16.665Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745370494/courses/1745370491890_17.jpg",
+      "id": 17
+    },
+    {
+      "title": "C#",
+      "category": "Programming language",
+      "price": 180,
+      "createdAt": "2025-04-23T01:08:30.857Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745370508/courses/1745370509075_18.jpg",
+      "id": 18
+    },
+    {
+      "title": "Ruby",
+      "category": "Programming language",
+      "price": 110,
+      "createdAt": "2025-04-23T01:08:49.118Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745370815/courses/1745370816252_19.jpg",
+      "id": 19
+    },
+    {
+      "title": "C programming language",
+      "category": "Programming language",
+      "price": 200,
+      "createdAt": "2025-04-23T01:09:50.269Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745370587/courses/1745370587268_20.jpg",
+      "id": 20
+    },
+    {
+      "title": "C++",
+      "category": "Programming language",
+      "price": 300,
+      "createdAt": "2025-04-23T01:10:12.567Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745370610/courses/1745370610837_21.jpg",
+      "id": 21
+    },
+    {
+      "title": "SQL",
+      "category": "Programming language",
+      "price": 80,
+      "createdAt": "2025-04-23T01:10:36.619Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745370750/courses/1745370751595_22.png",
+      "id": 22
+    },
+    {
+      "title": "asd",
+      "category": "FrontEnd",
+      "price": 123,
+      "createdAt": "2025-04-25T00:41:38.378Z",
+      "url": "https://res.cloudinary.com/dmclexcnp/image/upload/v1745541694/courses/1745541695301_x.jpg",
+      "id": 23
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+.carousel-caption {
+    position: absolute;
+    left: 10%;
+    width: 35%;
+    top: 50%;
+    transform: translateY(-50%);
+    height: fit-content;
+}

@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+body {
+    font-family: "DM Sans", sans-serif !important;
+}
+
+
+
+.btn-udemy {
+    background-color: var(--bs-indigo) !important;
+    transition: 0.3s;
+}
+
+.btn-udemy:hover {
+    background-color: var(--bs-purple) !important;
+}
+
+.text-udemy {
+    color: var(--bs-indigo);
+}
+
+.bg-udemy {
+    background-color: var(--bs-indigo);
+}

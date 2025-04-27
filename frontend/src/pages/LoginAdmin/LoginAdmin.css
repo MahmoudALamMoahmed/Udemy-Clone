@@ -1,0 +1,70 @@
+/* Container for the login form */
+.login-container {
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Styling for form elements */
+.login-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Error message styling */
+.login-container .error {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Flexbox for password field with icon */
+.password-field {
+    display: flex;
+    align-items: center;
+}
+
+.password-field input {
+    flex-grow: 1;
+}
+
+.password-field span {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* For smaller screens */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 15px 20px;
+    }
+}
