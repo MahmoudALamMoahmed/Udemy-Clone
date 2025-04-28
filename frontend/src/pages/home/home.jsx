@@ -101,7 +101,7 @@ export function HomePage() {
       <div className="bg-white d-flex justify-content-center align-items-center gap-5 py-5 flex-wrap">
         <img
           style={{ maxWidth: "300px" }}
-          src="../../../public/instructor.jpg"
+          src="instructor.jpg"
         />
         <div className="col-12 col-md-4 text-center text-md-start p-3">
           <h3 className="fs-1 fw-bold">Become an instructor</h3>

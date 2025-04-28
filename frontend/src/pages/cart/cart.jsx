@@ -58,7 +58,7 @@ export function CartPage() {
                 {
                     cartItems.length < 1 && <div className="container border shadow p-3 d-flex flex-column justify-content-center align-items-center gap-3 my-3">
                         <div>
-                            <img src="../../../public/empty-shopping-cart.jpg" />
+                            <img src="empty-shopping-cart.jpg" />
                         </div>
                         <h4>Your cart is empty. Keep shopping to find a course! </h4>
                         <Btn content={"keep shopping"} href="/" />

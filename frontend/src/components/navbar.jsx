@@ -21,7 +21,7 @@ export default function NavBar({ isLoggedIn, handleLogout }) {
     <nav className="navbar navbar-expand-lg bg-body-tertiary shadow">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <img src="../../public/logo-udemy.png" alt="Logo" />
+          <img src="logo-udemy.png" alt="Logo" />
         </Link>
 
         <form className="d-flex w-50" role="search">

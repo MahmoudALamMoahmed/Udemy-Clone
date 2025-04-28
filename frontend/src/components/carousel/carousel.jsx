@@ -5,21 +5,21 @@ export default function Carousel() {
     <div id="carouselExample" className="carousel carousel-dark slide">
       <div className="carousel-inner">
         <div className="carousel-item position-relative active">
-          <img src="../../../public/carousel-1.jpg" className="d-block w-100" alt="..." />
+          <img src="carousel-1.jpg" className="d-block w-100" alt="..." />
           <div className="carousel-caption bg-light d-none d-md-block p-5">
             <h5 className="display-5 fw-bold">Benefit big-time</h5>
             <p>Join our email list for special offers, personalized course recommendations, and more.</p>
           </div>
         </div>
         <div className="carousel-item position-relative">
-          <img src="../../../public/carousel-2.png" className="d-block w-100" alt="..." />
+          <img src="carousel-2.png" className="d-block w-100" alt="..." />
           <div className="carousel-caption bg-light d-none d-md-block p-5">
             <h5 className="display-5 fw-bold">Skills for everyone & everything</h5>
             <p>Our big sale is on. Get courses from $249.99 for your career & your life. Sale ends August 29.</p>
           </div>
         </div>
         <div className="carousel-item position-relative">
-          <img src="../../../public/carousel-3.jpg" className="d-block w-100" alt="..." />
+          <img src="carousel-3.jpg" className="d-block w-100" alt="..." />
           <div className="carousel-caption bg-light d-none d-md-block p-5">
             <h5 className="display-5 fw-bold">Ready for an upgrade?
             </h5>
