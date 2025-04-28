@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: "0.0.0.0", // يسمع على كل الشبكات مش localhost بس
-    port: process.env.PORT || 5173, // يستخدم البورت اللي Render يديه، أو 5173 لو بتشغل محلي
+    port: process.env.VITE_PORT || 5173, // يستخدم البورت اللي Render يديه، أو 5173 لو بتشغل محلي
   },
 });
