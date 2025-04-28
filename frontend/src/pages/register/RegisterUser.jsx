@@ -118,7 +118,7 @@ const RegisterUser = () => {
       setAlertMessage("Registration completed successfully");
       setShowAlert(true);
       // Navigate to LoginAdmin page after a short delay to show the alert
-      setTimeout(() => navigate('/LoginAdmin'), 2000);
+      setTimeout(() => navigate('/Login'), 2000);
     } else {
       setAlertMessage("Please correct the errors in the form.");
       setShowAlert(true);
@@ -215,7 +215,7 @@ const RegisterUser = () => {
         </button>
         <div className="mt-3">
           <p>
-            Already have an account? <Link to="/LoginAdmin">Login here</Link>
+            Already have an account? <Link to="/Login">Login here</Link>
           </p>
         </div>
       </form>

@@ -15,7 +15,7 @@ export default function NavBar({ isLoggedIn, handleLogout }) {
   const handleLogoutAndRedirect = () => {
     handleLogout();
     localStorage.removeItem("userRole");
-    navigate("/LoginAdmin");
+    navigate("/Login");
   };
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary shadow">
@@ -115,7 +115,7 @@ export default function NavBar({ isLoggedIn, handleLogout }) {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link fw-medium text-muted" to="/LoginAdmin">
+                  <Link className="nav-link fw-medium text-muted" to="/Login">
                     Sign In
                   </Link>
                 </li>

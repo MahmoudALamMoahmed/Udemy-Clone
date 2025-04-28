@@ -50,7 +50,7 @@ function App() {
         </Route>
         <Route path="/RegisterUser" element={<RegisterUser />} />
         <Route
-          path="/LoginAdmin"
+          path="/Login"
           element={<LoginAdmin setIsLoggedIn={setIsLoggedIn} />}
         />
         <Route path="/Admin/Products" element={<Productlist />} />
