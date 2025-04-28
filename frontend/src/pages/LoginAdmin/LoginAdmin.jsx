@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 const LoginAdmin = ({ setIsLoggedIn }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState("");
@@ -39,7 +39,7 @@ const LoginAdmin = ({ setIsLoggedIn }) => {
 
       // Check for admin in the database
       const response = await fetch(
-        `http://localhost:4000/users?email=${values.email}&password=${values.password}`
+        `${BASE_URL}/users?email=${values.email}&password=${values.password}`
       );
       const users = await response.json();
 

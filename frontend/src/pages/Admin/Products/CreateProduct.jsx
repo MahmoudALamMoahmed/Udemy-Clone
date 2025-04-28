@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export default function CreateProduct() {
     const [validationErrors, setValidationErrors] = useState({});
@@ -21,7 +22,7 @@ export default function CreateProduct() {
         }
 
         try {
-            const response = await fetch("http://localhost:4000/products", {
+            const response = await fetch(`${BASE_URL}/products`, {
                 method: "POST",
                 body: formData,
             });

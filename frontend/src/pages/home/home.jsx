@@ -7,13 +7,14 @@ import React, { useState, useEffect } from "react";
 import CardCourseComponent from "../../components/coursesCard";
 
 import axios from "axios";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export function HomePage() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/products") // Fetch data from the API
+      .get(`${BASE_URL}/products`) // Fetch data from the API
       .then((res) => {
         const lengthh = res.data;
         lengthh.length = 8;

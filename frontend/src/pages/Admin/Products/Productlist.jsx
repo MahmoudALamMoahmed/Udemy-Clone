@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 function Productlist() {
     const [products, setProducts] = useState([]);
@@ -11,7 +12,7 @@ function Productlist() {
     const [showModal, setShowModal] = useState(false);
 
     const getProducts = (page = 1) => {
-        fetch(`http://localhost:4000/products?_sort=id&_order=asc&_page=${page}&_limit=${productsPerPage}`)
+        fetch(`${BASE_URL}/products?_sort=id&_order=asc&_page=${page}&_limit=${productsPerPage}`)
             .then(res => {
                 if (res.ok) {
                     return res.json();
@@ -21,7 +22,7 @@ function Productlist() {
             .then(data => {
                 setProducts(data);
                 // Fetch total count for pagination
-                fetch("http://localhost:4000/products")
+                fetch(`${BASE_URL}/products`)
                     .then(res => res.json())
                     .then(allProducts => setTotalProducts(allProducts.length));
             })
@@ -41,7 +42,7 @@ function Productlist() {
     }
 
     function deleteProduct() {
-        fetch("http://localhost:4000/products/" + selectedProductId, {
+        fetch(`${BASE_URL}/products/` + selectedProductId, {
             method: "DELETE",
         })
             .then(response => {

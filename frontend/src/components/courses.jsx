@@ -1,12 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/actions/AddToCartAction";
-import { Fragment, useEffect, useState, useCallback, useMemo } from "react";
+
+import {  useEffect, useState, useCallback, useMemo } from "react";
 import axios from "axios";
 import CardMoveComponent from "./coursesCard";
-import { Link, useNavigate } from "react-router-dom";
-import { addToWishlist } from "../redux/actions/addToWishList";
+
 import Pagination from "@mui/material/Pagination";
-import Swal from "sweetalert2";
+
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export default function Courses() {
     // const [products, setProducst] = useState([]);
@@ -22,7 +21,7 @@ export default function Courses() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:4000/products")
+            .get(`${BASE_URL}/products`)
             .then((res) => {
 
                 console.log(res.data);

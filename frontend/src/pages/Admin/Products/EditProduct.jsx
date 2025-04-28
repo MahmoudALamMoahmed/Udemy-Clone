@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export default function EditProduct() {
     const params = useParams();
@@ -11,7 +12,7 @@ export default function EditProduct() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:4000/products/" + params.id)
+        fetch(`${BASE_URL}/products` + params.id)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -48,7 +49,7 @@ export default function EditProduct() {
             }
         
             try {
-                const response = await fetch("http://localhost:4000/products/" + params.id, {
+                const response = await fetch(`${BASE_URL}/products` + params.id, {
                     method: "PATCH",
                     body: formData
                 });

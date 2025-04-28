@@ -8,6 +8,7 @@ import { removeFromCart } from "../../redux/actions/RemoveFromCart";
 import Swal from "sweetalert2";
 import { addToCart } from "../../redux/actions/AddToCartAction";
 import { removeFromWishlist } from "../../redux/actions/removeFromWishlistAction";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export default function CourseDetails() {
   const [details, setDetails] = useState({});
@@ -16,7 +17,7 @@ export default function CourseDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/products/${params.id}`)
+      .get(`${BASE_URL}/products/${params.id}`)
       .then((res) => {
         console.log(res.data); // Fixed console.log
         setDetails(res.data);
