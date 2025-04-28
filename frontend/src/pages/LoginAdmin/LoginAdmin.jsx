@@ -1,15 +1,31 @@
 import './LoginAdmin.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+
 const LoginAdmin = ({ setIsLoggedIn }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState("");
-  const [successMessage, setSuccessMessage] = useState(""); // Add state for success message
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
+
+  // ✅ Add this to prevent logged-in users from accessing login page
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userRole = localStorage.getItem('userRole');
+
+    if (isLoggedIn) {
+      if (userRole === 'admin') {
+        navigate("/Admin/Products");
+      } else {
+        navigate("/Home");
+      }
+    }
+  }, [navigate]);
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -26,31 +42,27 @@ const LoginAdmin = ({ setIsLoggedIn }) => {
 
   const handleLogin = async (values) => {
     try {
-      // Check for regular user in local storage
       const storedUser = JSON.parse(localStorage.getItem('user'));
       if (storedUser && storedUser.email === values.email && storedUser.password === values.password) {
         setIsLoggedIn(true);
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userRole', 'user');
-        setSuccessMessage("Login completed successfully"); // Set success message
-        setTimeout(() => navigate("/Home"), 1500); // Redirect after 1.5 seconds to show the message
+        setSuccessMessage("Login completed successfully");
+        setTimeout(() => navigate("/Home"), 1500);
         return;
       }
 
-      // Check for admin in the database
       const response = await fetch(
         `${BASE_URL}/users?email=${values.email}&password=${values.password}`
       );
       const users = await response.json();
 
       if (users.length > 0) {
-
         setIsLoggedIn(true);
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userRole', 'admin');
-        setSuccessMessage("Login completed successfully"); // Set success message
-        setTimeout(() => navigate("/Admin/Products"), 1500); // Redirect after 1.5 seconds to show the message
-
+        setSuccessMessage("Login completed successfully");
+        setTimeout(() => navigate("/Admin/Products"), 1500);
       } else {
         setLoginError("Invalid email or password.");
       }
@@ -106,7 +118,7 @@ const LoginAdmin = ({ setIsLoggedIn }) => {
             </button>
             <div className="mt-3">
               <p>
-                Dont have an account? <a href="/RegisterUser">Register here</a>
+                Don't have an account? <a href="/RegisterUser">Register here</a>
               </p>
             </div>
           </Form>

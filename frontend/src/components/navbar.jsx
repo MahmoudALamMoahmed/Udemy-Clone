@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Fragment } from "react";
+import { useEffect } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
@@ -17,11 +17,13 @@ export default function NavBar({ isLoggedIn, handleLogout }) {
     localStorage.removeItem("userRole");
     navigate("/Login");
   };
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary shadow">
       <div className="container-fluid">
+        {/* Logo: ثابت دايمًا */}
         <Link className="navbar-brand" to="/">
-          <img src="logo-udemy.png" alt="Logo" />
+          <img src="/logo-udemy.png" alt="Logo" style={{ height: "40px" }} />
         </Link>
 
         <form className="d-flex w-50" role="search">
@@ -58,7 +60,7 @@ export default function NavBar({ isLoggedIn, handleLogout }) {
               </Link>
             </li>
 
-            {isLoggedIn ? (
+            {isLoggedin ? (
               <li className="nav-item dropdown">
                 <Link
                   className="nav-link dropdown-toggle text-dark"

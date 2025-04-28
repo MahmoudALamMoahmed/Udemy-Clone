@@ -1,39 +1,51 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 function Productlist() {
     const [products, setProducts] = useState([]);
     const [totalProducts, setTotalProducts] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage] = useState(8); // Adjust items per page here
+    const [productsPerPage] = useState(8);
     const [selectedProductId, setSelectedProductId] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [error, setError] = useState("");  // إضافة حالة لحفظ الأخطاء
+    const navigate = useNavigate(); // ➡️ ضروري تستخدم useNavigate
+
+    // 🔥 حماية الصفحة
+    useEffect(() => {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        const userRole = localStorage.getItem('userRole');
+
+        if (!(isLoggedIn === 'true' && userRole === 'admin')) {
+            navigate('/Login'); // لو مش أدمن أو مش مسجل دخول يرجعه للوجين
+        }
+    }, [navigate]);
 
     const getProducts = (page = 1) => {
+        setError(""); // مسح الخطأ القديم عند محاولة جلب بيانات جديدة
         fetch(`${BASE_URL}/products?_sort=id&_order=asc&_page=${page}&_limit=${productsPerPage}`)
             .then(res => {
                 if (res.ok) {
                     return res.json();
                 }
-                throw new Error();
+                throw new Error("Unable to fetch products.");
             })
             .then(data => {
                 setProducts(data);
-                // Fetch total count for pagination
                 fetch(`${BASE_URL}/products`)
                     .then(res => res.json())
                     .then(allProducts => setTotalProducts(allProducts.length));
             })
             .catch(err => {
-                /* alert("Unable to get the data"); */
+                setError("Unable to load products. Please try again later.");
             });
     };
 
     useEffect(() => {
         getProducts(currentPage);
-
     }, [currentPage]);
 
     function handleDeleteClick(id) {
@@ -47,13 +59,13 @@ function Productlist() {
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error();
+                    throw new Error("Unable to delete product.");
                 }
                 getProducts(currentPage);
                 setShowModal(false);
             })
             .catch(error => {
-                alert("Unable to delete the product");
+                setError("Unable to delete the product.");
             });
     }
 
@@ -62,6 +74,10 @@ function Productlist() {
     return (
         <div className="container my-4">
             <h2 className="text-center mb-4">Dashboard Courses</h2>
+
+            {/* عرض رسالة خطأ إذا كانت موجودة */}
+            {error && <div className="alert alert-danger">{error}</div>}
+
             <div className="row mb-3">
                 <div className="col">
                     <Link className="btn btn-primary me-1" to="/Admin/Products/Create" role="button">
@@ -89,7 +105,7 @@ function Productlist() {
                             <td>{product.id}</td>
                             <td>{product.title}</td>
                             <td>
-                                <img src={ product.url} width="100" alt="..." />
+                                <img src={product.url} width="100" alt="..." />
                             </td>
                             <td>{product.category}</td>
                             <td>{product.price} $</td>
@@ -125,7 +141,6 @@ function Productlist() {
                     </li>
                 </ul>
             </nav>
-
 
             {/* Bootstrap Modal */}
             <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

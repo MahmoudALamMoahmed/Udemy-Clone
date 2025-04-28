@@ -56,6 +56,30 @@ function App() {
         <Route path="/Admin/Products" element={<Productlist />} />
         <Route path="/Admin/Products/Create" element={<CreateProduct />} />
         <Route path="/Admin/Products/Edit/:id" element={<EditProduct />} />
+        {/* <Route
+    path="/Admin/Products"
+    element={
+      <AdminRoute>
+        <Productlist />
+      </AdminRoute>
+    }
+  />
+  <Route
+    path="/Admin/Products/Create"
+    element={
+      <AdminRoute>
+        <CreateProduct />
+      </AdminRoute>
+    }
+  />
+  <Route
+    path="/Admin/Products/Edit/:id"
+    element={
+      <AdminRoute>
+        <EditProduct />
+      </AdminRoute>
+    }
+  /> */}
       </Routes>
       <Footer />
     </BrowserRouter>

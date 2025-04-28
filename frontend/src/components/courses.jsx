@@ -1,14 +1,12 @@
-
-import {  useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import axios from "axios";
 import CardMoveComponent from "./coursesCard";
-
 import Pagination from "@mui/material/Pagination";
+import CircularProgress from "@mui/material/CircularProgress"; // لودر احترافي من MUI
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export default function Courses() {
-    // const [products, setProducst] = useState([]);
     const [list, setList] = useState([]);
     const [page, setPage] = useState(1);
     const [catsFilter, setCatsFilter] = useState([]);
@@ -19,63 +17,52 @@ export default function Courses() {
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(88888888888);
 
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [down, setDown] = useState(false);
+
     useEffect(() => {
+        setLoading(true);
+        setError(false);
         axios
             .get(`${BASE_URL}/products`)
             .then((res) => {
-
-                console.log(res.data);
                 const subcategoryTitles = res.data.map((item) => item.category);
                 const uniqueTitles = Array.from(new Set(subcategoryTitles));
                 setCatsFilter(uniqueTitles);
-                console.log(uniqueTitles);
-                const searched = res.data
-                    .filter((item) =>
-                        item.title
-                            .toLocaleLowerCase()
-                            .includes(searchValue.toLocaleLowerCase())
-                    )
-                    .filter((item) => {
-                        const amount = Number(item.price);
-                        return amount > min && amount < max;
-                    });
 
-                const data = res.data
-                    .filter((item) => item.category === catName)
-                    .filter((item) => {
-                        const amount = Number(item.price);
+                const filtered = res.data.filter((item) => {
+                    const amount = Number(item.price);
+                    return amount > min && amount < max;
+                });
 
-                        return amount > min && amount < max;
-                    });
+                const searched = filtered.filter((item) =>
+                    item.title.toLowerCase().includes(searchValue.toLowerCase())
+                );
 
-                searchOr ? setFilteredData(searched) : setFilteredData(data);
+                const categoryFiltered = filtered.filter((item) => item.category === catName);
 
-                console.log(searched, 999999, data);
+                setFilteredData(searchOr ? searched : categoryFiltered);
+                setList(res.data);
             })
             .catch((err) => {
                 console.error(err);
+                setError(true);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     }, [catName, searchValue, searchOr, min, max]);
 
-    //   useEffect(() => {
-    //     axios.get("../dataset_udemy-courses.json").then((res) => {
-    //       setProducst(res.data);
-    //     });
-    //   }, []);
+    const handlePageChange = (_, p) => setPage(p);
 
-    // functions
-    const handlePageChange = (v, p) => {
-        setPage(p);
-    };
-
-    const handleClick = useCallback((e) => {
+    const handleClick = useCallback((category) => {
         setPage(1);
-        setCatName(e);
+        setCatName(category);
         setSearch(false);
-        // setDown(false);
     }, []);
 
-    const search = useCallback((e) => {
+    const handleSearch = useCallback((e) => {
         setSearch(true);
         setPage(1);
         setSearchValue(e.target.value);
@@ -85,11 +72,10 @@ export default function Courses() {
         setPage(1);
         setMin(Number(e.target.value));
     };
+
     const handleMax = (e) => {
         setPage(1);
-        e.target.value.length == 0
-            ? setMax(888888888)
-            : setMax(Number(e.target.value));
+        setMax(e.target.value ? Number(e.target.value) : 888888888);
     };
 
     const paginatedData = useMemo(() => {
@@ -97,163 +83,115 @@ export default function Courses() {
         return filteredData.slice(start, start + 10);
     }, [filteredData, page]);
 
-    const [down, setDown] = useState(false);
-    // functions
-
-
     return (
-        <div className="row  text-center mx-auto">
+        <div className="row text-center mx-auto">
             <h1 className="m-3">Our Courses</h1>
-            <div>
-                {
-                    <div className="input-group m-4 mx-auto">
-                        <span className="input-group-text" id="inputGroup-sizing-default">
-                            Search
-                        </span>
+
+            <div className="input-group m-4 mx-auto">
+                <span className="input-group-text" id="inputGroup-sizing-default">Search</span>
+                <input
+                    type="text"
+                    className="form-control"
+                    aria-label="Search input"
+                    aria-describedby="inputGroup-sizing-default"
+                    onKeyUp={handleSearch}
+                />
+            </div>
+
+            <div className="row w-100 my-4 mx-auto">
+                <div className="col-lg-3 col-md-12 text-start">
+                    <h3 style={{ textShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)" }}>
+                        Price
+                    </h3>
+                    <div className="d-flex mb-3">
                         <input
+                            type="number"
+                            placeholder="Min"
+                            className="form-control me-2"
+                            style={{ width: "100px" }}
+                            onKeyUp={handleMin}
                             min="0"
-                            type="text"
-                            className="form-control"
-                            aria-label="Search input"
-                            aria-describedby="inputGroup-sizing-default"
-                            onKeyUp={search}
+                        />
+                        <span className="align-self-center">:</span>
+                        <input
+                            type="number"
+                            placeholder="Max"
+                            className="form-control ms-2"
+                            style={{ width: "100px" }}
+                            onKeyUp={handleMax}
                         />
                     </div>
-                }
-            </div>
 
-            <div>
-                {/* ALL  */}
+                    <h1 className="fs-3">
+                        Categories{" "}
+                        <i
+                            className={`fa-solid fa-caret-${down ? "down" : "right"}`}
+                            style={{ cursor: "pointer" }}
+                            onClick={() => setDown(!down)}
+                        ></i>
+                    </h1>
 
-                {/* border border-1 border-danger */}
-            </div>
+                    <button
+                        className={`btn d-block m-2 ${down ? "" : "d-none"}`}
+                        style={{
+                            width: "13rem",
+                            minHeight: "3rem",
+                            borderBottom: "1px solid #d1d7dc",
+                            backgroundColor: "white",
+                            textAlign: "start",
+                        }}
+                        onClick={() => {
+                            setCatName("");
+                            setSearch(true);
+                        }}
+                    >
+                        All
+                    </button>
 
-            <div style={{ width: "100vw" }} className="main  my-4 mx-auto row">
-                <div className="left-side col-lg-3 col-md-12  ">
-                    {
-                        <div>
-                            <h3
-                                className="text-start"
-                                style={{
-                                    textShadow:
-                                        " rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;",
-                                }}
-                            >
-                                Price{" "}
-                            </h3>
-                            <div className="d-flex">
-                                <div
-                                    className="input-group mb-3  me-2"
-                                    style={{ width: "100px" }}
-                                >
-                                    <input
-                                        style={{ MozAppearance: "none" }}
-                                        type="number"
-                                        placeholder="Min"
-                                        className="form-control "
-                                        aria-label="Search input"
-                                        aria-describedby="inputGroup-sizing-default"
-                                        onKeyUp={handleMin}
-                                        min="0"
-                                    />
-                                </div>
-                                <h1 className="d-inline ">:</h1>
-                                <div className="input-group mb-3" style={{ width: "100px" }}>
-                                    <input
-                                        placeholder="Max"
-                                        type="number"
-                                        className="form-control"
-                                        aria-label=" input"
-                                        aria-describedby="inputGroup-sizing-default"
-                                        onKeyUp={handleMax}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    <div className="row text-start ">
-                        <h1 className=" fs-3">
-                            Categories{" "}
-                            <i
-                                style={{ cursor: "pointer" }}
-                                className={`fa-solid fa-caret-${down ? "down" : "right"} `}
-                                onClick={() => setDown(!down)}
-                            ></i>
-                        </h1>
+                    {catsFilter.map((item, index) => (
                         <button
+                            key={index}
+                            className={`btn d-block m-2 ${down ? "" : "d-none"} ${catName === item ? "text-info" : ""}`}
                             style={{
                                 width: "13rem",
                                 minHeight: "3rem",
-                                // padding: ".8rem 1.6rem",
                                 borderBottom: "1px solid #d1d7dc",
-                                color: "#2d2f31",
+                                backgroundColor: "white",
                                 textAlign: "start",
-                                // fontWeight: "700",
-                                lineHeight: "1.2",
-                                letterSpacing: "0",
-                                // fontSize: "1.6rem",
-                                backgroundColor: "white !important",
                             }}
-                            type="button"
-                            className={`btn d-block  m-2 ${down ? "" : "d-none "}`}
-                            onClick={() => (setCatName(""), setSearch(true))}
+                            onClick={() => handleClick(item)}
                         >
-                            All
+                            {item}
                         </button>
-                        {catsFilter.map((item, index) => (
-                            <button
-                                style={{
-                                    width: "13rem",
-                                    minHeight: "3rem",
-                                    // padding: ".8rem 1.6rem",
-                                    borderBottom: "1px solid #d1d7dc",
-                                    color: "#2d2f31",
-                                    textAlign: "start",
-                                    // fontWeight: "700",
-                                    lineHeight: "1.2",
-                                    letterSpacing: "0",
-                                    // fontSize: "1.6rem",
-                                    backgroundColor: "white !important",
-                                }}
-                                key={index}
-                                type="button"
-                                className={`btn ${down ? "" : "d-none "
-                                    }   m-2 col-lg-2 col-md-4  d-inline-block ${catName === item ? "text-info" : ""
-                                    }`}
-                                onClick={() => handleClick(item)}
-                            >
-                                {item}
-                            </button>
-                        ))}
-                    </div>
+                    ))}
                 </div>
-                <di className="row  mx-auto col-lg-9  ">
-                    {filteredData.length > 0 || searchValue.length >= 0 ? (
+
+                <div className="col-lg-9 row mx-auto">
+                    {loading ? (
+                        <div className="d-flex justify-content-center align-items-center" style={{ height: "200px" }}>
+                            <CircularProgress />
+                        </div>
+                    ) : error ? (
+                        <div className="text-center w-100">
+                            <h3 className="text-danger">No courses found</h3>
+                        </div>
+                    ) : (
                         <>
-                            {paginatedData.map((courese) => (
-                                <div
-                                    className="col-lg-3 col-md-4 col-sm-6 col-xsm-12 mt-3"
-                                    key={courese.id}
-                                >
-                                    <CardMoveComponent
-                                        course={courese}
-                                    />
+                            {filteredData.length > 0 ? (
+                                paginatedData.map((course) => (
+                                    <div className="col-lg-3 col-md-4 col-sm-6 col-12 mt-3" key={course.id}>
+                                        <CardMoveComponent course={course} />
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="text-center w-100">
+                                    <h4>No matching courses</h4>
                                 </div>
-                            ))}
-                            <h1></h1>
+                            )}
                             <Pagination
                                 sx={{
-                                    // marginInline: "auto",
                                     width: "auto",
                                     margin: "10px auto",
-                                    // "& .MuiPaginationItem-root": {
-                                    //   color: "white",
-                                    //   borderColor: "white",
-                                    // },
-                                    // "& .MuiPaginationItem-root.Mui-selected": {
-                                    //   backgroundColor: "white",
-                                    //   color: "blue",
-                                    // },
                                     display: "block",
                                 }}
                                 count={Math.ceil(filteredData.length / 10)}
@@ -263,91 +201,9 @@ export default function Courses() {
                                 shape="rounded"
                             />
                         </>
-                    ) : (
-                        <>
-                            {list.map((courese) => (
-                                <div className="col-3 mt-3" key={courese.id}>
-                                    <CardMoveComponent
-                                        img={courese.image}
-                                        title={courese.title}
-                                        url={`/details/${courese.id}`}
-                                    // movie={courese}
-                                    />
-                                </div>
-                            ))}
-                            <h1></h1>
-                            <Pagination
-                                sx={{
-                                    marginInline: "auto",
-                                    width: "auto",
-                                    "& .MuiPaginationItem-root": {
-                                        color: "white",
-                                        borderColor: "white",
-                                    },
-                                    "& .MuiPaginationItem-root.Mui-selected": {
-                                        backgroundColor: "white",
-                                        color: "blue",
-                                    },
-                                    display: "block",
-                                }}
-                                count={10}
-                                color="standard"
-                                onChange={handlePageChange}
-                                variant="outlined"
-                                shape="rounded"
-                            />
-                        </>
                     )}
-                </di>
+                </div>
             </div>
         </div>
     );
 }
-
-// {
-//   <Fragment>
-//     <button className="btn btn-primary me-2" onClick={() => handleCart(prod)}>
-//       Add to Cart
-//     </button>
-
-//     <button
-//       className="btn btn-primary me-2"
-//       onClick={() => handleWishList(prod)}
-//     >
-//       Add to WishList
-//     </button>
-//   </Fragment>;
-// }
-
-// {
-//     <div>
-//     {cartItems.find((item) => item.id == prod.id) ? (
-//       <Link to="/cart" className="btn btn-success me-2">
-//         Go to Cart
-//       </Link>
-//     ) : joinedCourses.find((item) => item.id == prod.id) ? (
-//       <Link
-//         to="/learning"
-//         className="btn text-white btn-udemy me-2"
-//       >
-//         Go to My Learning
-//       </Link>
-//     ) : (
-//       <Fragment>
-//         <button
-//           className="btn btn-primary me-2"
-//           onClick={() => handleCart(prod)}
-//         >
-//           Add to Cart
-//         </button>
-
-//         <button
-//           className="btn btn-primary me-2"
-//           onClick={() => handleWishList(prod)}
-//         >
-//           Add to WishList
-//         </button>
-//       </Fragment>
-//     )}
-//   </div>
-// }
