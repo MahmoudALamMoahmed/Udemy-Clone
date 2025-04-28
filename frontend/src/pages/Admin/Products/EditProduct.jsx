@@ -12,7 +12,7 @@ export default function EditProduct() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`${BASE_URL}/products` + params.id)
+        fetch(`${BASE_URL}/products/` + params.id)
             .then(response => {
                 if (response.ok) {
                     return response.json();
