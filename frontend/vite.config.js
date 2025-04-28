@@ -7,5 +7,6 @@ export default defineConfig({
   server: {
     host: "0.0.0.0", // يسمع على كل الشبكات مش localhost بس
     port: process.env.VITE_PORT || 5173, // يستخدم البورت اللي Render يديه، أو 5173 لو بتشغل محلي
+    allowedHosts: [".onrender.com"], // يسمح للمضيف الذي ينتهي بـ .onrender.com
   },
 });
