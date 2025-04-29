@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
@@ -118,7 +118,8 @@ const LoginAdmin = ({ setIsLoggedIn }) => {
             </button>
             <div className="mt-3">
               <p>
-                Don't have an account? <a href="/RegisterUser">Register here</a>
+              
+                Don't have an account? <Link to="/RegisterUser">Register here</Link>
               </p>
             </div>
           </Form>
