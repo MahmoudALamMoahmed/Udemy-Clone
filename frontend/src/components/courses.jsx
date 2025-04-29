@@ -188,10 +188,11 @@ export default function Courses() {
                                     <h4>No matching courses</h4>
                                 </div>
                             )}
+                             <h1> </h1>
                             <Pagination
                                 sx={{
                                     width: "auto",
-                                    margin: "10px auto",
+                                    margin: "50px auto",
                                     display: "block",
                                 }}
                                 count={Math.ceil(filteredData.length / 10)}
