@@ -122,7 +122,7 @@ export default function MyCoursesCard({ course, handleCourseToAdd, wishlist, lis
                 </ul>
             </div>
             <Link to={`/details/${course.id}`}>
-                <img src={course.url} className="card-img-top" alt="course image" />
+                <img src={course.url} className="card-img-top" alt="course image" style={{height:"180px"}} />
             </Link>
             <div className="card-body p-3 mt-3">
                 <Link className="text-dark text-decoration-none" to={`/details/${course.id}`}>
