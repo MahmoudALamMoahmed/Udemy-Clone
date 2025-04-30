@@ -49,7 +49,7 @@ export default function EditProduct() {
             }
         
             try {
-                const response = await fetch(`${BASE_URL}/products` + params.id, {
+                const response = await fetch(`${BASE_URL}/products/` + params.id, {
                     method: "PATCH",
                     body: formData
                 });
